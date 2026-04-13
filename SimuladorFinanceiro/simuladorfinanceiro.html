@@ -5,7 +5,6 @@
     <title>Simulador de Risco - Data Center</title>
 </head>
 <body>
-
 <h2>Simulador de Risco de Data Center</h2>
 
 Quantidade de servidores:<br><input type="number" id="ipt_servidores"><br>
@@ -19,6 +18,7 @@ Nível de refrigeração:<br>
 </select><br><br>
 
 <button onclick="calcular()">Analisar cenário</button>
+<div id="div_txt"></div>
 <div id="div_msg"></div>
 </body>
 </html>
@@ -26,13 +26,10 @@ Nível de refrigeração:<br>
 <script>
 
 let ano = 1;
-
 let temperaturaambiente = 31;
 let umidadeambiente = 70;
 
 function calcular() {
-
-    div_msg.innerHTML = "";
 
     let servidores = Number(ipt_servidores.value);
     let idade = Number(ipt_idade.value);
@@ -43,63 +40,63 @@ function calcular() {
     let custoservidor = 30000;
     let patrimoniototal = servidores * custoservidor;
 
-    div_msg.innerHTML += "<h3>Analise automatica do data center</h3><br>";
+    div_txt.innerHTML += "<h3>Analise automatica do data center</h3><br>";
 
     let contador = 0;
     while (contador < servidores) {
         risco += 0.15;
         contador++;
+         
     }
-    div_msg.innerHTML += "Servidores analisados: <b>" + servidores + "</b><br>";
-
-
+     div_txt.innerHTML += "Servidores analisados: <b>" + servidores + "</b><br>";
+  
     if (idade <= 5) {
         risco += 0.05;
-        div_msg.innerHTML += "Servidores novos (baixo risco de idade)";
+        div_txt.innerHTML += "Servidores novos (baixo risco de idade)";
     } 
     else if (idade <= 10) {
         risco += 0.15;
-        div_msg.innerHTML += "Servidores intermediarios (risco moderado)";
+        div_txt.innerHTML += "Servidores intermediarios (risco moderado)";
     } 
     else if (idade <= 15) {
         risco += 0.30;
-        div_msg.innerHTML += "Servidores antigos (risco alto)";
+        div_txt.innerHTML += "Servidores antigos (risco alto)";
     } 
     else {
         risco += 0.50;
-        div_msg.innerHTML += "Servidores muito antigos (risco critico)";
+        div_txt.innerHTML += "Servidores muito antigos (risco critico)";
     }
 
 
     if (usosistema >= 80) {
         risco += 5;
-        div_msg.innerHTML += "Uso critico do sistema";
+        div_txt.innerHTML += "<br>Uso critico do sistema";
     } 
     else if (usosistema >= 50) {
         risco += 2;
-        div_msg.innerHTML += "Uso moderado do sistema";
+        div_txt.innerHTML += "<br>Uso moderado do sistema";
     } 
     else {
         risco += 1;
-        div_msg.innerHTML += "Uso baixo do sistema";
+        div_txt.innerHTML += "<br>Uso baixo do sistema";
     }
 
 
     if (refrigeracao == "baixo") {
         risco += 5;
-        div_msg.innerHTML += "Refrigeracao critica";
+        div_txt.innerHTML += "<br>Refrigeracao critica";
     } 
     else if (refrigeracao == "medio") {
         risco += 2;
-        div_msg.innerHTML += "Refrigeracao media";
+        div_txt.innerHTML += "<br>Refrigeracao media";
     } 
     else {
-        div_msg.innerHTML += "Refrigeracao adequada";
+        div_txt.innerHTML += "<br>Refrigeracao adequada";
     }
 
     if (temperaturaambiente > 27) {
         risco += 5;
-        div_msg.innerHTML += "Temperatura critica (31C)";
+        div_txt.innerHTML += "<br>Temperatura critica (31C)";
     }
 
     if (umidadeambiente > 60) {
@@ -120,13 +117,10 @@ function calcular() {
 
     let servidoresdanificados = (servidores * taxafalha * ano);
     let prejuizo = servidoresdanificados * custoservidor;
-
     let reducaorisco = 0.7;
     let economia = prejuizo * reducaorisco;
-
     
-    div_msg.innerHTML += "<br><h3>TRANSPARENCIA</h3> Patrimonio: R$ " + patrimoniototal.toFixed(2) + "<br> Prejuizo: R$ " + prejuizo.toFixed(2) + "<br> Economia com DHT11: R$ " + economia.toFixed(2) + "<br>";
-
+    div_msg.innerHTML += "<br><h3>TRANSPARENCIA</h3> Gasto dos sevidores: R$ " + patrimoniototal.toFixed(2) + "<br> Prejuizo: R$ " + prejuizo.toFixed(2) + "<br> Economia com DHT11: R$ " + economia.toFixed(2) + "<br>";
 
     if (risco >= 12) {
         div_msg.innerHTML += "<h3>RISCO CRITICO</h3>Ambiente instavel - DHT11 essencial";
