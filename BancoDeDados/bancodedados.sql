@@ -35,7 +35,7 @@ CREATE TABLE Lugar (
 		REFERENCES Empresa(idEmpresa)
 );
 
--CREATE TABLE Sensor (
+CREATE TABLE Sensor (
     idSensor INT AUTO_INCREMENT PRIMARY KEY,
     fkEmpresa INT NOT NULL,
     CONSTRAINT fkEmpresaSensor FOREIGN KEY (fkEmpresa)	
