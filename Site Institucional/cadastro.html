@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cad.css">
+</head>
+<header class="header">
+        <section>
+            <a href="index.html" class="logo">
+                <img src="/img/EASYSERVER__1_-removebg-preview 1.png" alt="logo">
+            </a>
+            <nav class="navBar">
+                <a href="index.html">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="login.html">Login </a>
+                <a href="cadastro.html">Cadastro</a>
+
+            </nav>
+        </section>
+    </header>   
+<body>
+
+    <div id="div_form">
+        <span class="titu">Cadastro</span>
+        <div id="formu">
+            <div class="linha">
+                <span class="titulo_campo">Nome</span>
+                <div class="campo">
+                    <input id="ipt_nome" oninput="vlNome()">
+                    <span id="msg_nome"></span>
+                </div>
+            </div>
+
+            <div class="linha">
+                <span class="titulo_campo">Email</span>
+                <div class="campo">
+                    <input id="ipt_email" oninput="vlEmail()">
+                    <span id="msg_email"></span>
+                </div>
+            </div>
+
+            <div class="linha">
+                <span class="titulo_campo">Telefone</span>
+                <div class="campo">
+                    <input id="ipt_telefone" oninput="vlTelefone()">
+                    <span id="msg_tel"></span>
+                </div>
+            </div>
+
+            <div class="linha">
+                <span class="titulo_campo">CPF</span>
+                <div class="campo">
+                    <input id="ipt_cpf" oninput="vlCpf()">
+                    <span id="msg_cpf"></span>
+                </div>
+            </div>
+
+            <div class="linha">
+                <span class="titulo_campo">Senha</span>
+                <div class="campo">
+                    <input id="ipt_senha" oninput="vlSenha()">
+                    <span id="msg_senha"></span>
+                </div>
+            </div>
+
+            <div class="linha">
+                <span class="titulo_campo">Confirmar Senha</span>
+                <div class="campo">
+                    <input id="ipt_confirm_senha" oninput="cnfSenha()">
+                    <span id="msg_conf"></span>
+                </div>
+            </div>
+
+            <button onclick="criar()">Criar Conta</button>
+
+            <p>
+                Já possui uma conta?
+                <a href="login.html" id="btn_login">Login</a>
+            </p>
+        </div>
+
+        <div id="msg"></div>
+
+    </div>
+
+    <script>
+        function vlNome() {
+            let nome = ipt_nome.value;
+            if (nome.length <= 2) {
+                msg_nome.innerHTML = `<span class="erro">✖ Nome inválido</span>`;
+            } else {
+                msg_nome.innerHTML = `<span class="certo">✔ Nome válido</span>`;
+            }
+        }
+
+        function vlTelefone() {
+            let tel = ipt_telefone.value;
+            if (tel.length != 11) {
+                msg_tel.innerHTML = `<span class="erro">✖ Telefone inválido</span>`;
+            } else {
+                msg_tel.innerHTML = `<span class="certo">✔ Telefone válido</span>`;
+            }
+        }
+
+        function vlCpf() {
+            let cpf = ipt_cpf.value;
+            if (cpf.length != 11) {
+                msg_cpf.innerHTML = `<span class="erro">✖ CPF inválido</span>`;
+            } else {
+                msg_cpf.innerHTML = `<span class="certo">✔ CPF válido</span>`;
+            }
+        }
+
+        function vlEmail() {
+            let email = ipt_email.value;
+            if (email.includes('@')) {
+                msg_email.innerHTML = `<span class="certo">✔ Email válido</span>`;
+            } else {
+                msg_email.innerHTML = `<span class="erro">✖ Precisa conter @</span>`;
+            }
+        }
+
+        function vlSenha() {
+            let senha = ipt_senha.value;
+            if (senha.length < 6) {
+                msg_senha.innerHTML = `<span class="erro">✖ Senha fraca</span>`;
+            } else if (senha.includes('@')) {
+                msg_senha.innerHTML = `<span class="certo">✔ Senha forte</span>`;
+            } else {
+                msg_senha.innerHTML = `<span class="media">⚠ Senha média</span>`;
+            }
+        }
+
+        function cnfSenha() {
+            let senha = ipt_senha.value;
+            let conf = ipt_confirm_senha.value;
+            if (senha === conf && senha !== "") {
+                msg_conf.innerHTML = `<span class="certo">✔ Senhas iguais</span>`;
+            } else {
+                msg_conf.innerHTML = `<span class="erro">✖ Senhas diferentes</span>`;
+            }
+        }
+
+        function criar() {
+            let nome = ipt_nome.value;
+            let email = ipt_email.value;
+            let tel = ipt_telefone.value;
+            let senha = ipt_senha.value;
+            let conf_senha = ipt_confirm_senha.value;
+            let cpf = ipt_cpf.value;
+            let erro = false;
+
+            msg_nome.innerHTML = "";
+            msg_email.innerHTML = "";
+            msg_tel.innerHTML = "";
+            msg_cpf.innerHTML = "";
+            msg_senha.innerHTML = "";
+            msg_conf.innerHTML = "";
+            msg.innerHTML = "";
+
+            if (nome.length <= 2) {
+                msg_nome.innerHTML = `<span class="erro">✖ Nome inválido</span>`;
+                erro = true;
+            }
+
+            if (!email.includes('@')) {
+                msg_email.innerHTML = `<span class="erro">✖ Email inválido</span>`;
+                erro = true;
+            }
+
+            if (tel.length != 11) {
+                msg_tel.innerHTML = `<span class="erro">✖ Telefone inválido</span>`;
+                erro = true;
+            }
+
+            if (cpf.length != 11) {
+                msg_cpf.innerHTML = `<span class="erro">✖ CPF inválido</span>`;
+                erro = true;
+            }
+
+            if (senha.length < 6) {
+                msg_senha.innerHTML = `<span class="erro">✖ Senha muito curta</span>`;
+                erro = true;
+            }
+
+            if (senha != conf_senha) {
+                msg_conf.innerHTML = `<span class="erro">✖ Senhas não coincidem</span>`;
+                erro = true;
+            }
+
+            if (!erro) {
+                formu.style.display = "none";
+                msg.innerHTML = `<b>✔ Conta criada com sucesso para <br>${nome}!</b>`;
+                btn_voltar.style.display = "inline-block";
+            }
+        }
+    </script>
+
+</body>
+</html>
