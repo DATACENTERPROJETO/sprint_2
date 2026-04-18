@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+  <header class="header">
+        <section>
+            <a href="index.html" class="logo">
+                <img src="/img/EASYSERVER__1_-removebg-preview 1.png" alt="logo">
+            </a>
+            <nav class="navBar">
+                <a href="index.html">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="login.html">Login </a>
+                <a href="cadastro.html">Cadastro</a>
+
+            </nav>
+        </section>
+    </header>   
+<body>
+
+    <div id="div_form">
+        <span class="titu">LOGIN</span>
+
+        <div class="linha">
+            <span class="titulo_campo">Email</span>
+            <div class="campo">
+                <input id="ipt_email">
+                <span id="msg_email"></span>
+            </div>
+        </div>
+
+        <div class="linha">
+            <span class="titulo_campo">Senha</span>
+            <div class="campo">
+                <input id="ipt_senha">
+                <span id="msg_senha"></span>
+            </div>
+        </div>
+
+        <button onclick="Login()">Login</button>
+
+        <p>
+            Ainda não possui uma conta?
+            <a href="cadastro.html" id="btn_login">Cadastrar-se</a>
+        </p>
+
+        <div id="msg"></div>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    function Login() {
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let erro = false;
+
+        msg_email.innerHTML = "";
+        msg_senha.innerHTML = "";
+        msg.innerHTML = "";
+
+        if (!email.includes('@')) {
+            msg_email.innerHTML = "✖ Email inválido";
+            erro = true;
+        }
+
+        if (senha.length < 6 || !senha.includes('@')) {
+            msg_senha.innerHTML = "✖ Senha invalida";
+            erro = true;
+        }
+
+        if (!erro) {
+                 window.location.href = "calculadora.html";
+        }
+    }
+</script>
