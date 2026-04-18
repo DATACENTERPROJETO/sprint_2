@@ -2,33 +2,66 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Risco - Data Center</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="simuladorfinanceiro.css">
 </head>
+
 <body>
-<h2>Simulador de Risco de Data Center</h2>
 
-Quantidade de servidores:<br><input type="number" id="ipt_servidores"><br>
-Idade média dos servidores (anos):<br><input type="number" id="ipt_idade"><br>
-Nível de uso do sistema (%):<br><input type="number" id="ipt_carga"><br>
-Nível de refrigeração:<br>
-<select id="ipt_refrigeracao">
-    <option value="baixo">Baixo</option>
-    <option value="medio">Médio</option>
-    <option value="alto">Alto</option>
-</select><br><br>
+<header class="header">
+    <section>
+        <a href="index.html" class="logo">
+            <img src="EASYSERVER__1_-removebg-preview 1.png" alt="logo">
+        </a>
+        <nav class="navBar">
+            <a href="index.html">Home</a>
+            <a href="#sobre">Sobre</a>
+            <a href="login.html">Login</a>
+            <a href="cadastro.html">Cadastro</a>
+        </nav>
+    </section>
+</header>
 
-<button onclick="calcular()">Analisar cenário</button>
-<div id="div_txt"></div>
-<div id="div_msg"></div>
+<main>
+    <div class="container">
+
+        <h2>Simulador de Risco de Data Center</h2>
+
+        <div class="campo">
+            <label>Quantidade de servidores:</label>
+            <input type="number" id="ipt_servidores" name="servidores">
+        </div>
+
+        <div class="campo">
+            <label>Idade média dos servidores (anos):</label>
+            <input type="number" id="ipt_idade" name="idade">
+        </div>
+
+        <div class="campo">
+            <label>Nível de uso do sistema (%):</label>
+            <input type="number" id="ipt_carga" name="carga">
+        </div>
+
+        <div class="campo">
+            <label>Nível de refrigeração:</label>
+            <select id="ipt_refrigeracao" name="refrigeracao">
+                <option value="baixo">Baixo</option>
+                <option value="medio">Médio</option>
+                <option value="alto">Alto</option>
+            </select>
+        </div>
+
+        <button onclick="calcular()">Analisar cenário</button>
+        <div id="div_txt"></div>
+        <div id="div_msg"></div>
+    </div>
+</main>
 </body>
 </html>
-
 <script>
-
-let ano = 1;
-let temperaturaambiente = 31;
-let umidadeambiente = 70;
-
 function calcular() {
 
     let servidores = Number(ipt_servidores.value);
