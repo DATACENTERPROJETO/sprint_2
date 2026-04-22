@@ -4,7 +4,7 @@
     --bg: #0E025C;
     --btn: #3522AC;
     --ciano: #A6FFF5;
-    --border: 0.1rem solid rgba(0, 0, 0, 0.3);
+    --border: 1px solid rgba(0, 0, 0, 0.3);
     font-size: 10px;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 section {
-    padding: 3rem 2rem;
+    padding: 30px 20px;
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -43,41 +43,41 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .navBar a {
-    margin: 0 1rem;
-    font-size: 1.8rem;
+    margin: 0 10px;
+    font-size: 18px;
     color: beige;
 }
 
 .navBar a:hover {
     color: #A6FFF5;
-    border-bottom: 0.1rem solid var(--ciano);
-    padding: 0.5rem;
-    font-size: 2rem;
+    border-bottom: 1px solid var(--ciano);
+    padding: 5px;
+    font-size: 20px;
 }
 
 .btn {
     background-color: var(--btn);
     color: beige;
-    padding: 1rem 3rem;
-    font-size: 1.7rem;
+    padding: 10px 30px;
+    font-size: 17px;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 10px;
     display: inline-block;
     text-align: center;
     border: var(--btn);
     border-radius: 1rem;
-    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
 
 .btn:hover {
-    letter-spacing: 0.5rem;
-    box-shadow: 0.4 rem 0.4rem 1rem rgba(0, 0, 0, 0.5);
+    letter-spacing: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .home-container {
@@ -94,33 +94,33 @@ section {
 
 .content {
     display: flex;
-    max-width: 60rem;
+    max-width: 600px;
     flex-direction: column;
 }
 
 .content h3 {
     color: #fff;
-    font-size: 5rem;
+    font-size: 50px;
 }
 
 .content p {
     color: #fff;
-    font-size: 2.5rem;
+    font-size: 25px;
     font-weight: 100;
     line-height: 1.8;
-    padding: 1rem 0;
+    padding: 10px 0;
 }
 
 .title {
     text-align: end;
-    margin-right: 4rem;
-    font-size: 4rem;
+    margin-right: 40px;
+    font-size: 40px;
     color: var(--black);
-    margin-bottom: 4rem;
+    margin-bottom: 40px;
 }
 
 .title span {
-    font-size: 4rem;
+    font-size: 40px;
     color: var(--btn);
     text-align: end;
 }
@@ -134,17 +134,17 @@ section {
 }
 
 .sobre .row .content {
-    font-size: 3rem;
+    font-size: 30px;
     color: #13131a;
-    margin-left: 15rem;
+    margin-left: 150px;
 
 
 }
 
 .sobre .row .content p {
-    font-size: 1.6rem;
+    font-size: 16rpx;
     color: #13131a;
-    padding: 1rem 0;
+    padding: 10px 0;
     line-height: 1.8;
     text-align: center;
 }
@@ -154,7 +154,7 @@ section {
     align-items: center;
     justify-content: space-around;
     background-color: #0E025C;
-    margin-top: 10rem;
+    margin-top: 100px;
     min-width: 96.4vw;
     min-height: 48vh;
 }
@@ -168,14 +168,14 @@ section {
 
 .title2 {
     margin-top: 0;
-    font-size: 2.5rem;
+    font-size: 25px;
     text-align: center;
     color: #fff;
 }
 
 .title2 span {
     margin-top: 0;
-    font-size: 2.5rem;
+    font-size: 25px;
     text-align: center;
     color: var(--ciano);
 }
@@ -183,7 +183,7 @@ section {
 .coisas {
     display: flex;
     text-align: center;
-    padding: 2rem;
+    padding: 20px;
     justify-content: space-around;
     align-items: flex-start;
 }
@@ -192,7 +192,7 @@ section {
     display: flex;
     justify-content: center;
     margin-top: 10px;
-    font-size: 4rem;
+    font-size: 40px;
     color: var(--black);
 }
 .footer {
