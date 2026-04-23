@@ -11,7 +11,7 @@
     <h1>Graphics</h1>
     <div style="display: flex;">
         <div style="width: 50%;">
-            <canvas id="sensorTemperatura"></canvas>
+            <canvas id="sensorTemperatura" style="position: relative; height: 40vh; width: 40vw;"></canvas>
         </div>
         <div style="width: 50%;">
             <canvas id="sensorUmidade"></canvas>
@@ -24,9 +24,17 @@
             data: {
                 datasets: [{
                     label: 'Temperatura',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#ED145B'
-                }]
+                    borderColor: 'orange',
+                    backgroundColor: 'orange'
+                }, {
+                    label: 'Temperatura Maxima',
+                    borderColor: 'red',
+                    backgroundColor: 'red'
+                },
+                {label: 'Temperatura Minima',
+                    borderColor: 'green',
+                    backgroundColor: 'green'}
+            ]
             },
             options: {
                 scales: {
@@ -49,8 +57,16 @@
             data: {
                 datasets: [{
                     label: 'Umidade',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#0762C8'
+                    borderColor: 'blue',
+                    backgroundColor: 'blue'
+                },{
+                    label: 'Limite Umidade',
+                    borderColor: 'red',
+                    backgroundColor: 'red'
+                },{
+                    label: 'Abaixo Umidade',
+                    borderColor: 'green',
+                    backgroundColor: 'green'
                 }]
             },
             options: {
@@ -63,7 +79,7 @@
                             display: true,
                             text: '(%)'
                         },
-                        beginAtZero: true
+                        beginAtZero: true,
                     }
                 }
             }
@@ -72,7 +88,7 @@
         var paginacao = {};
         var tempo = {};
 
-        function obterDados(grafico, endpoint) {
+        function obterDadosUmidade(grafico, endpoint) {
             fetch('http://localhost:3300/sensores/' + endpoint)
                 .then(response => response.json())
                 .then(valores => {
@@ -94,7 +110,40 @@
                         }
 
                         grafico.data.labels.push(tempo[endpoint]++);
-                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        grafico.data.datasets[0].data.push(parseFloat(valor - 15));
+                        grafico.data.datasets[1].data.push(65);
+                        grafico.data.datasets[2].data.push(40);
+                        grafico.update();
+                    });
+                })
+                .catch(error => console.error('Erro ao obter dados:', error));
+        }
+
+        function obterDadosTemperatura(grafico, endpoint) {
+            fetch('http://localhost:3300/sensores/' + endpoint)
+                .then(response => response.json())
+                .then(valores => {
+                    if (paginacao[endpoint] == null) {
+                        paginacao[endpoint] = 0;
+                    }
+                    if (tempo[endpoint] == null) {
+                        tempo[endpoint] = 0;
+                    }
+
+                    var ultimaPaginacao = paginacao[endpoint];
+                    paginacao[endpoint] = valores.length;
+                    valores = valores.slice(ultimaPaginacao);
+
+                    valores.forEach((valor) => {
+                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                            grafico.data.labels.shift();
+                            grafico.data.datasets[0].data.shift();
+                        }
+
+                        grafico.data.labels.push(tempo[endpoint]++);
+                        grafico.data.datasets[0].data.push(parseFloat(valor - 5));
+                        grafico.data.datasets[1].data.push(27);
+                        grafico.data.datasets[2].data.push(18);
                         grafico.update();
                     });
                 })
@@ -102,8 +151,8 @@
         }
 
         setInterval(() => {
-            obterDados(sensorTemperatura, 'analogico');
-            obterDados(sensorUmidade, 'digital');
+            obterDadosTemperatura(sensorTemperatura, 'analogico');
+            obterDadosUmidade(sensorUmidade, 'digital');
         }, 1000);
 
     </script>
