@@ -57,6 +57,10 @@
 </html>
 
 <script>
+
+    let vt_email = JSON.parse(localStorage.getItem('banco_emails')) || [];
+    let vt_senha = JSON.parse(localStorage.getItem('banco_senhas')) || [];
+
     function Login() {
         let email = ipt_email.value;
         let senha = ipt_senha.value;
@@ -77,7 +81,15 @@
         }
 
         if (!erro) {
-                 window.location.href = "simuladorfinanceiro.html";
-        }
+            let temlogin = vt_email.indexOf(email);
+
+            if (temlogin !== -1 && vt_senha[temlogin] === senha) {
+                alert("Login realizado com sucesso!");
+                window.location.href = "simuladorfinanceiro.html";
+            } else {
+                alert("Email ou senha não cadastrados ou incorretos.");
+            }
     }
+
+} 
 </script>

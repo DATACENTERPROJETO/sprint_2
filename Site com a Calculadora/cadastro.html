@@ -87,6 +87,10 @@
     </div>
 
     <script>
+
+        vt_email = [];
+        vt_senha = [];
+
         function vlNome() {
             let nome = ipt_nome.value;
             if (nome.length <= 2) {
@@ -194,7 +198,15 @@
             if (!erro) {
                 formu.style.display = "none";
                 msg.innerHTML = `<b>✔ Conta criada com sucesso para <br>${nome}!</b>`;
-                btn_voltar.style.display = "inline-block";
+
+                vt_email.push(email);
+                console.log(vt_email);
+
+                vt_senha.push(senha);
+                console.log(vt_senha);
+
+                localStorage.setItem('banco_emails', JSON.stringify(vt_email));
+                localStorage.setItem('banco_senhas', JSON.stringify(vt_senha));
             }
         }
     </script>

@@ -14,7 +14,6 @@
     outline: none;
     border: none;
     text-decoration: none;
-    text-transform: capitalize;
     transition: 0.2 linear;
     font-family: "Montserrat", sans-serif;
 }
