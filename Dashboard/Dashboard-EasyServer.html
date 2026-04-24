@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EasyServer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <div class="topo">
+
+        <h1>EasyServer</h1>
+
+        <div>
+            Sensor:
+
+            <select id="sensor">
+                <option value="1">
+                    Sensor 01 - Rack 01
+                </option>
+
+                <option value="2">
+                    Sensor 02 - Rack 02
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="container">
+
+        <!-- esquerda -->
+        <div class="esquerda">
+
+
+            <div class="kpis">
+
+                <div class="card">
+                    <h3>Temperatura Atual</h3>
+                    <p id="tempAtual">26°C</p>
+                </div>
+
+                <div class="card">
+                    <h3>Umidade Atual</h3>
+                    <p id="umiAtual">56%</p>
+                </div>
+
+            </div>
+
+
+
+            <div class="linha">
+
+                <div class="graficoMenor">
+                    <canvas id="graficoTemp"></canvas>
+                </div>
+
+                <div class="graficoMenor">
+                    <canvas id="graficoUmidade"></canvas>
+                </div>
+
+            </div>
+
+
+
+            <div class="graficoGrande">
+                <canvas id="graficoPrincipal"></canvas>
+            </div>
+
+
+        </div>
+
+
+
+        <!-- direita -->
+        <div class="direita">
+
+            <div class="box">
+                <h2>Alertas</h2>
+
+                <p id="alertas"> 2 ativos </p>
+            </div>
+
+
+            <div class="box">
+                <div class="box">
+
+                    <h2>Status dos Sensores</h2>
+
+                    <div class="tabela">
+
+                        <div class="linha-topo">
+                            <div>Sensor</div>
+                            <div>Local</div>
+                            <div>Temp</div>
+                            <div>Umid</div>
+                            <div>Status</div>
+                        </div>
+
+
+                        <div class="linha-status">
+
+                            <div>Sensor 01</div>
+
+                            <div>Rack 01</div>
+
+                            <div id="temp1">26.3°C</div>
+
+                            <div id="umid1">56.1%</div>
+
+                            <div>
+                                <span class="normal" id="st1">
+                                    Normal
+                                </span>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="linha-status">
+
+                            <div>Sensor 02</div>
+
+                            <div>Rack 02</div>
+
+                            <div id="temp2">27.8°C</div>
+
+                            <div id="umid2">61.2% </div>
+
+                            <div>
+                                <span class="atencao" id="st2">
+                                    Atenção
+                                </span>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="linha-status">
+
+                            <div>Sensor 03</div>
+
+                            <div>Rack 03</div>
+
+                            <div id="temp3">29.1°C</div>
+
+                            <div id="umid3">65.3%</div>
+
+                            <div>
+                                <span class="critico" id="st3">
+                                    Crítico
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        /* dias */
+
+        var dias = ["10", "11", "12", "13", "14", "15", "16"];
+
+
+        /* sensor 1 */
+
+        var sensor1 = {
+            temp: [25, 26, 24, 27, 28, 26, 27],
+            umi: [60, 63, 59, 64, 66, 58, 58],
+
+            tempAtual: "26°C",
+            umiAtual: "56%",
+
+            alerta: "2 ativos",
+
+            status: [
+                "Normal",
+                "Atenção",
+                "Crítico"
+            ]
+
+        };
+
+
+
+        /* sensor 2 */
+
+        var sensor2 = {
+
+            temp: [22, 23, 24, 25, 24, 23, 22],
+            umi: [70, 68, 67, 66, 65, 66, 67],
+
+            tempAtual: "24°C",
+            umiAtual: "67%",
+
+            alerta: "1 ativo",
+
+            status: [
+                "Normal",
+                "Normal",
+                "Atenção"
+            ]
+
+        };
+
+
+
+
+        /* grafico grande */
+
+        var principal =
+            new Chart(
+                document.getElementById("graficoPrincipal"),
+                {
+                    type: "bar",
+
+                    data: {
+
+                        labels: dias,
+
+                        datasets: [
+
+                            {
+                                label: "Temperatura",
+                                data: sensor1.temp
+                            },
+
+                            {
+                                label: "Umidade",
+                                data: sensor1.umi
+                            }
+
+                        ]
+
+                    },
+
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+
+                }
+            );
+
+
+
+
+
+        /* grafico temp */
+
+        var gTemp =
+            new Chart(
+                document.getElementById("graficoTemp"),
+                {
+                    type: "line",
+
+                    data: {
+                        labels: dias,
+                        
+
+                        datasets: [
+                            {
+                                label: "Temperatura",
+                                
+                                data: sensor1.temp
+                        
+                            }
+                        ]
+
+                    },
+
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+
+                }
+            );
+
+
+
+
+        /* grafico umidade */
+
+        var gUmi =
+            new Chart(
+                document.getElementById("graficoUmidade"),
+                {
+                    type: "line",
+
+                    data: {
+                        labels: dias,
+
+                        datasets: [
+                            {
+                                label: "Umidade",
+                                data: sensor1.umi
+                            }
+                        ]
+
+                    },
+
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+
+                }
+            );
+
+
+
+
+
+        /* trocar sensor */
+
+        document.getElementById("sensor")
+            .addEventListener("change", trocar);
+
+
+        function trocar() {
+
+            var dados;
+
+            if (
+                document.getElementById("sensor").value == "1"
+            ) {
+                dados = sensor1;
+            }
+            else {
+                dados = sensor2;
+            }
+
+
+            /* cards */
+
+            document.getElementById("tempAtual")
+            innerHTML = dados.tempAtual;
+
+            document.getElementById("umiAtual")
+            innerHTML = dados.umiAtual;
+
+            document.getElementById("alertas")
+            innerHTML = dados.alerta;
+
+
+
+            /* status */
+
+            document.getElementById("s1")
+            innerHTML = dados.status[0];
+
+            document.getElementById("s2")
+            innerHTML = dados.status[1];
+
+            document.getElementById("s3")
+            innerHTML = dados.status[2];
+
+
+
+            /* atualizar graficos */
+
+            principal.data.datasets[0].data =
+                dados.temp;
+
+            principal.data.datasets[1].data =
+                dados.umi;
+
+            principal.update();
+
+
+
+            gTemp.data.datasets[0].data =
+                dados.temp;
+
+            gTemp.update();
+
+
+
+            gUmi.data.datasets[0].data =
+                dados.umi;
+
+            gUmi.update();
+
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
