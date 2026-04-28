@@ -8,30 +8,45 @@
 </head>
 <body>
 
-<h2>Simulador de Risco de Data Center</h2>
+<div class="container">
 
-Quantidade de servidores:<br><input type="number" id="ipt_servidores"><br>
-Idade média dos servidores (anos):<br><input type="number" id="ipt_idade"><br>
-Nível de uso do sistema (%):<br><input type="number" id="ipt_carga"><br>
+    <h2>Simulador de Risco de Data Center</h2>
 
-Nível de refrigeração:<br>
-<select id="ipt_refrigeracao">
-    <option value="baixo">Baixo</option>
-    <option value="medio">Médio</option>
-    <option value="alto">Alto</option>
-</select><br><br>
+    <div class="campo">
+        <label>Quantidade de servidores:</label>
+        <input type="number" id="ipt_servidores">
+    </div>
 
-<button onclick="calcular()">Analisar cenário</button>
+    <div class="campo">
+        <label>Idade média dos servidores (anos):</label>
+        <input type="number" id="ipt_idade">
+    </div>
 
-<div id="div_txt"></div>
-<div id="div_msg"></div>
-</body>
-</html>
+    <div class="campo">
+        <label>Nível de uso do sistema (%):</label>
+        <input type="number" id="ipt_carga">
+    </div>
+
+    <div class="campo">
+        <label>Nível de refrigeração:</label>
+        <select id="ipt_refrigeracao">
+            <option value="baixo">Baixo</option>
+            <option value="medio">Médio</option>
+            <option value="alto">Alto</option>
+        </select>
+    </div>
+
+    <button onclick="calcular()">Analisar cenário</button>
+
+    <div id="div_txt"></div>
+    <div id="div_msg"></div>
+
+</div>
 <script>
+function calcular() {
+
 let temperaturaambiente = 31;
 let umidadeambiente = 70;
-
-function calcular() {
 
     div_txt.innerHTML = "";
     div_msg.innerHTML = "";
@@ -151,6 +166,7 @@ function calcular() {
 
         let semsensortotal = patrimoniototal + prejuizototal;
         let comsensortotal = patrimoniototal + gastofinaltotal;
+        
 
         div_msg.innerHTML += `<h3>RESULTADO em 1 ano</h3>
             Gasto com servidores: R$ ${patrimoniototal.toFixed(2)}<br>
@@ -181,3 +197,5 @@ function calcular() {
     }
 }
 </script>
+</body>
+</html>
