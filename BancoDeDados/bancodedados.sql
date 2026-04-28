@@ -4,10 +4,8 @@ USE easyServerMonitoramento;
 CREATE TABLE Empresa (
     idEmpresa INT AUTO_INCREMENT PRIMARY KEY,
     cnpj CHAR(18) NOT NULL UNIQUE,
-    senha VARCHAR (45) NOT NULL,
     nome VARCHAR(45) NOT NULL,
     contato VARCHAR(45) NOT NULL,
-    email VARCHAR(45) NOT NULL,
     endereco VARCHAR(45) NOT NULL,
     cep CHAR(8),
     dtCriacao DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -66,38 +64,22 @@ CREATE TABLE Medicoes (
 
 SELECT * FROM Funcionario;
 -- INSERTS 
-INSERT INTO Empresa (cnpj, senha, nome, contato, email, endereco, cep)
-VALUES ('12.789.678/0025-90', 'SENHA321', 'ADUBE AZURE', 'AMANDA MARTINES', 'ADUBE.AZURE@GMAIL.COM.BR', 'AV. FRADIQUE COUTINHO, 1000 - SÃO PAULO', 78923546),
-	  ('12.345.678/0001-90', 'SENHA123', 'TECH CORP SOLUTIONS', 'JOÃO SILVA', 'ALERTA@TECHCORP.COM.BR', 'AV. PAULISTA, 1000 - SÃO PAULO', 05688266);
+INSERT INTO Empresa (cnpj, nome, contato, endereco, cep)
+VALUES ('12.789.678/0025-90', 'ADUBE AZURE', 'AMANDA MARTINES', 'AV. FRADIQUE COUTINHO, 1000 - SÃO PAULO', 78923546);
 
 INSERT INTO Funcionario (fkEmpresa, senha, nome, email, cargo)
 VALUES (2, 'SENHA56988', 'MARIA MOREIRA', 'MARIA.AZURE@GMAIL.COM.BR', 'GESTORA DE PROJETOS'),
 (1, 'SENHA12256', 'CARLOS ALMEIDA', 'CARLOS@TECHCORP.COM.BR', 'GERENTE DE TI');
 
 INSERT INTO Lugar (nome, tipo, descricaoLugar, fkEmpresa)
-VALUES ('Sala UPS', 'Energia', 'Sala com destribuição elétrica', 2),
-('Corredor Frio', 'Climatização', 'Área de entrada e saída de ar refrigerdo', 2),
-('Rack B1', 'Rack', 'Rack com banco de dados ', 1),
-('Rack 01', 'Rack', 'Rack principal com servidores', 1);
+VALUES
+('Corredor Frio', 'Climatização', 'Área de entrada e saída de ar refrigerdo', 1),
+('Rack B1', 'Rack', 'Rack com banco de dados ', 1);
 
 
 INSERT INTO Sensor (modeloSensor, fkEmpresa,  fkLugar, statusSensor, dtInstalacao)
-VALUES ('DHT11', 1, 1, 'Inativo', '2026-08-14'),
-('DHT11',1,2,'Ativo', '2024-02-13'),
-('LM35', 2, 3, 'Em Manutenção', default),
-('DHT11', 2, 3, 'Ativo', default),
-('DHT11', 2, 4, 'Pendente', default);
-
-
-INSERT INTO Medicoes (fkSensor, fkEmpresa, valor, unidadeDeMedida, dtMedicao)
-VALUES (1, 1, 27.5, 'celsius', default ),
-	(1, 1, 77.10 , 'porcentagem', default),
-    (2, 1, 15.2, 'celsius', default),
-    (2, 1, 38, 'porcentagem', default),
-    (3, 2, 22.3, 'celsius', default),
-    (4, 2, 15.9, 'celsius', default),
-    (4, 2, 55, 'porcentagem', default);
-    
+VALUES ('DHT11', 1, 3, 'Inativo', '2026-08-14'),
+	
 -- SELECT 
 SELECT empresa.nome AS 'Nome Da Empresa', 
 lugar.nome AS 'Local do Sensor', 
