@@ -21,27 +21,20 @@
             Sensor:
 
             <select id="sensor">
-                <option value="1">
-                    Sensor 01 - Rack 01
-                </option>
 
-                <option value="2">
-                    Sensor 02 - Rack 02
-                </option>
+                <option value="1"> Sensor 01 - Rack 01 </option>
+                <option value="2"> Sensor 02 - Rack 02 </option>
 
             </select>
-
         </div>
 
     </div>
-
 
 
     <div class="container">
 
         <!-- esquerda -->
         <div class="esquerda">
-
 
             <div class="kpis">
 
@@ -58,7 +51,6 @@
             </div>
 
 
-
             <div class="linha">
 
                 <div class="graficoMenor">
@@ -72,11 +64,9 @@
             </div>
 
 
-
             <div class="graficoGrande">
                 <canvas id="graficoPrincipal"></canvas>
             </div>
-
 
         </div>
 
@@ -85,85 +75,69 @@
         <!-- direita -->
         <div class="direita">
 
-            <div class="box">
+            <div class="box-alerta">
                 <h2>Alertas</h2>
 
-                <p id="alertas"> 2 ativos </p>
+                <p id="alertas"> 2 ativos</p>
             </div>
 
 
-            <div class="box">
-                <div class="box">
 
-                    <h2>Status dos Sensores</h2>
+            <div class="box-tab-status">
 
-                    <div class="tabela">
+                <h2>Status dos Sensores</h2>
 
-                        <div class="linha-topo">
-                            <div>Sensor</div>
-                            <div>Local</div>
-                            <div>Temp</div>
-                            <div>Umid</div>
-                            <div>Status</div>
+                <div class="tabela">
+
+                    <div class="linha-topo">
+                        <div>Sensor</div>
+                        <div>Local</div>
+                        <div>Temp</div>
+                        <div>Umid</div>
+                        <div>Status</div>
+                    </div>
+
+                    <div class="linha-status">
+
+                        <div>Sensor 01</div>
+                        <div>Rack 01</div>
+                        <div>26.3°C</div>
+                        <div>56.1%</div>
+
+                        <div>
+                            <span class="atencao" id="st1">
+                                Atenção
+                            </span>
                         </div>
 
+                    </div>
 
-                        <div class="linha-status">
+                    <div class="linha-status">
 
-                            <div>Sensor 01</div>
+                        <div>Sensor 02</div>
+                        <div>Rack 02</div>
+                        <div>28.1°C</div>
+                        <div>67.2%</div>
 
-                            <div>Rack 01</div>
-
-                            <div id="temp1">26.3°C</div>
-
-                            <div id="umid1">56.1%</div>
-
-                            <div>
-                                <span class="normal" id="st1">
-                                    Normal
-                                </span>
-                            </div>
-
+                        <div>
+                            <span class="critico" id="st2">
+                                Crítico
+                            </span>
                         </div>
 
+                    </div>
 
+                    <div class="linha-status">
 
-                        <div class="linha-status">
+                        <div>Sensor 03</div>
+                        <div>Rack 03</div>
+                        <div>22°C</div>
+                        <div>50.3%</div>
 
-                            <div>Sensor 02</div>
-
-                            <div>Rack 02</div>
-
-                            <div id="temp2">27.8°C</div>
-
-                            <div id="umid2">61.2% </div>
-
-                            <div>
-                                <span class="atencao" id="st2">
-                                    Atenção
-                                </span>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="linha-status">
-
-                            <div>Sensor 03</div>
-
-                            <div>Rack 03</div>
-
-                            <div id="temp3">29.1°C</div>
-
-                            <div id="umid3">65.3%</div>
-
-                            <div>
-                                <span class="critico" id="st3">
-                                    Crítico
-                                </span>
-                            </div>
-
+                        <div>
+                            <span class="normal" id="st3">
+                                Normal
+                            </span>
                         </div>
 
                     </div>
@@ -176,90 +150,81 @@
     </div>
 
 
-
-
     <script>
+        var tempoSeg = ["10", "11", "12", "13", "14", "15", "16"]; // grafico de linhas
+        var tempoHoras = ["06h", "07h", "08h", "09h", "10h", "11h", "12h"]; // grafico de barras
 
-        /* dias */
-
-        var dias = ["10", "11", "12", "13", "14", "15", "16"];
 
 
         /* sensor 1 */
-
         var sensor1 = {
-            temp: [25, 26, 24, 27, 28, 26, 27],
-            umi: [60, 63, 59, 64, 66, 58, 58],
+            temp: [25, 24, 26, 23, 25, 22, 23],
+            umi: [38, 42, 40, 49, 53, 59, 54],
 
             tempAtual: "26°C",
             umiAtual: "56%",
-
             alerta: "2 ativos",
 
-            status: [
-                "Normal",
-                "Atenção",
-                "Crítico"
-            ]
-
+            status: ["Atenção", "Crítico", "Normal"]
         };
-
 
 
         /* sensor 2 */
-
         var sensor2 = {
+            temp: [22, 23, 21, 24, 23, 21, 22],
+            umi: [42, 44, 41, 45, 46, 50, 47],
 
-            temp: [22, 23, 24, 25, 24, 23, 22],
-            umi: [70, 68, 67, 66, 65, 66, 67],
-
-            tempAtual: "24°C",
+            tempAtual: "28°C",
             umiAtual: "67%",
+            alerta: "2 ativo",
 
-            alerta: "1 ativo",
-
-            status: [
-                "Normal",
-                "Normal",
-                "Atenção"
-            ]
-
+            status: ["Atenção", "Crítico", "Normal"]
         };
 
 
 
-
-        /* grafico grande */
+        /* gráfico de Tem. e Umi. */
 
         var principal =
             new Chart(
                 document.getElementById("graficoPrincipal"),
                 {
-                    type: "bar",
 
                     data: {
-
-                        labels: dias,
+                        labels: tempoHoras,
 
                         datasets: [
 
                             {
+                                type: "bar",
                                 label: "Temperatura",
-                                data: sensor1.temp
+                                data: sensor1.temp,
+                                backgroundColor: "red"
                             },
 
                             {
+                                type: "bar",
                                 label: "Umidade",
-                                data: sensor1.umi
+                                data: sensor1.umi,
+                                backgroundColor: "blue"
+                            },
+
+                            {
+                                type: "line",
+                                label: "Limite Temp",
+                                data: [27, 27, 27, 27, 27, 27, 27],
+                                borderColor: "red"
+                            },
+
+                            {
+                                type: "line",
+                                label: "Limite Umidade",
+                                data: [55, 55, 55, 55, 55, 55, 55],
+                                borderColor: "blue"
                             }
 
                         ]
 
-                    },
-
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
                     }
 
                 }
@@ -268,8 +233,7 @@
 
 
 
-
-        /* grafico temp */
+        /* gráfico temperatura */
 
         var gTemp =
             new Chart(
@@ -278,23 +242,16 @@
                     type: "line",
 
                     data: {
-                        labels: dias,
-                        
+                        labels: tempoSeg,
 
                         datasets: [
                             {
                                 label: "Temperatura",
-                                
-                                data: sensor1.temp
-                        
+                                data: sensor1.temp,
+                                borderColor: "red"
                             }
                         ]
 
-                    },
-
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
                     }
 
                 }
@@ -303,7 +260,7 @@
 
 
 
-        /* grafico umidade */
+        /* gráfico umidade */
 
         var gUmi =
             new Chart(
@@ -312,20 +269,16 @@
                     type: "line",
 
                     data: {
-                        labels: dias,
+                        labels: tempoSeg,
 
                         datasets: [
                             {
                                 label: "Umidade",
-                                data: sensor1.umi
+                                data: sensor1.umi,
+                                borderColor: "blue"
                             }
                         ]
 
-                    },
-
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
                     }
 
                 }
@@ -337,7 +290,8 @@
 
         /* trocar sensor */
 
-        document.getElementById("sensor")
+        document
+            .getElementById("sensor")
             .addEventListener("change", trocar);
 
 
@@ -350,66 +304,45 @@
             ) {
                 dados = sensor1;
             }
+
             else {
                 dados = sensor2;
             }
 
 
             /* cards */
+            document.getElementById("tempAtual").innerHTML = dados.tempAtual;
 
-            document.getElementById("tempAtual")
-            innerHTML = dados.tempAtual;
+            document.getElementById("umiAtual").innerHTML = dados.umiAtual;
 
-            document.getElementById("umiAtual")
-            innerHTML = dados.umiAtual;
-
-            document.getElementById("alertas")
-            innerHTML = dados.alerta;
-
+            document.getElementById("alertas").innerHTML = dados.alerta;
 
 
             /* status */
+            document.getElementById("st1").innerHTML = dados.status[0];
 
-            document.getElementById("s1")
-            innerHTML = dados.status[0];
+            document.getElementById("st2").innerHTML = dados.status[1];
 
-            document.getElementById("s2")
-            innerHTML = dados.status[1];
-
-            document.getElementById("s3")
-            innerHTML = dados.status[2];
+            document.getElementById("st3").innerHTML = dados.status[2];
 
 
 
-            /* atualizar graficos */
+            principal.data.datasets[0].data = dados.temp;
+            principal.data.datasets[1].data = dados.umi;
 
-            principal.data.datasets[0].data =
-                dados.temp;
+            gTemp.data.datasets[0].data = dados.temp;
 
-            principal.data.datasets[1].data =
-                dados.umi;
+            gUmi.data.datasets[0].data = dados.umi;
+
 
             principal.update();
-
-
-
-            gTemp.data.datasets[0].data =
-                dados.temp;
-
             gTemp.update();
-
-
-
-            gUmi.data.datasets[0].data =
-                dados.umi;
-
             gUmi.update();
-
 
         }
 
-    </script>
 
+    </script>
 
 </body>
 

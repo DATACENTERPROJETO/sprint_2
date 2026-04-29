@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="style.css">
 </head>
-  <header class="header">
-        <section>
-            <a href="index.html" class="logo">
-                <img src="EASYSERVER__1_-removebg-preview 1.png" alt="logo">
-            </a>
-            <nav class="navBar">
-                <a href="index.html">Home</a>
-                <a href="#sobre">Sobre</a>
-                <a href="login.html">Login </a>
-                <a href="cadastro.html">Cadastro</a>
+<header class="header">
+    <section>
+        <a href="index.html" class="logo">
+            <img src="EASYSERVER__1_-removebg-preview 1.png" alt="logo">
+        </a>
+        <nav class="navBar">
+            <a href="index.html">Home</a>
+            <a href="#sobre">Sobre</a>
+            <a href="login.html">Login </a>
+            <a href="cadastro.html">Cadastro</a>
 
-            </nav>
-        </section>
-    </header>   
+        </nav>
+    </section>
+</header>
+
 <body>
 
     <div id="div_form">
@@ -54,16 +56,19 @@
     </div>
 
 </body>
+
 </html>
 
 <script>
+    let listaLogin = ['adm@gmail.com'];
+    let listaSenha = ['adm@123'];
+    let tentativa = 4;
 
     function Login() {
-        let vt_email = JSON.parse(localStorage.getItem('banco_emails')) || [];
-        let vt_senha = JSON.parse(localStorage.getItem('banco_senhas')) || [];
 
         let email = ipt_email.value;
         let senha = ipt_senha.value;
+        let contador = 0;
         let erro = false;
 
         msg_email.innerHTML = "";
@@ -76,20 +81,31 @@
         }
 
         if (senha.length < 6) {
-            msg_senha.innerHTML = "✖ Senha invalida";
+            msg_senha.innerHTML = "✖ Senha inválida";
             erro = true;
         }
 
         if (!erro) {
-            let temlogin = vt_email.indexOf(email);
 
-            if (temlogin !== -1 && vt_senha[temlogin] === senha) {
+            if (listaSenha[0] != senha) {
+                if (tentativa > 1) {
+                    while (contador < 1) {
+                        tentativa--;
+                        contador++
+                        alert(`Senha Incorreta. Restam ${tentativa} chances!`)
+                    }
+                } else {
+                    alert('Você errou a senha 3 vezes, tente nocamente mais tarde!')
+                }
+            } else {
                 alert("Login realizado com sucesso!");
                 window.location.href = "dashboard.html";
-            } else {
-                alert("Email ou senha não cadastrados ou incorretos.");
+
+
             }
+        }
     }
 
-} 
+
 </script>
+  

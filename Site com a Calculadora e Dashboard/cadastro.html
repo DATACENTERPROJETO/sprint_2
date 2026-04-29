@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +21,7 @@
 
             </nav>
         </section>
-    </header>   
+    </header>  
 <body>
 
     <div id="div_form">
@@ -86,145 +87,120 @@
 
     </div>
 
-   <script>
-
-    let formu = document.getElementById("formu");
-
-
-    let vt_email = JSON.parse(localStorage.getItem('banco_emails')) || [];
-    let vt_senha = JSON.parse(localStorage.getItem('banco_senhas')) || [];
-
-    function vlNome() {
-        let nome = ipt_nome.value;
-        msg_nome.innerHTML = nome.length > 2 
-            ? `<span class="certo">✔ Nome válido</span>` 
-            : `<span class="erro">✖ Nome inválido</span>`;
-    }
-
-    function vlTelefone() {
-        let tel = ipt_telefone.value;
-        msg_tel.innerHTML = tel.length == 11 
-            ? `<span class="certo">✔ Telefone válido</span>` 
-            : `<span class="erro">✖ Telefone inválido</span>`;
-    }
-
-    function vlCpf() {
-        let cpf = ipt_cpf.value;
-        msg_cpf.innerHTML = cpf.length == 11 
-            ? `<span class="certo">✔ CPF válido</span>` 
-            : `<span class="erro">✖ CPF inválido</span>`;
-    }
-
-    function vlEmail() {
-        let email = ipt_email.value;
-        msg_email.innerHTML = email.includes('@') 
-            ? `<span class="certo">✔ Email válido</span>` 
-            : `<span class="erro">✖ Precisa conter @</span>`;
-    }
-
-    function vlSenha() {
-        let senha = ipt_senha.value;
-
-        if (senha.length < 6) {
-            msg_senha.innerHTML = `<span class="erro">✖ Senha fraca</span>`;
-        } else if (
-            senha.includes('@') ||
-            senha.includes('#') ||
-            senha.includes('$') ||
-            senha.includes('!') ||
-            senha.includes('%') ||
-            senha.includes('&')
-        ) {
-            msg_senha.innerHTML = `<span class="certo">✔ Senha forte</span>`;
-        } else {
-            msg_senha.innerHTML = `<span class="media">⚠ Senha média (use @ # $ % ! &)</span>`;
-        }
-    }
-
-    function cnfSenha() {
-        let senha = ipt_senha.value;
-        let conf = ipt_confirm_senha.value;
-
-        msg_conf.innerHTML = (senha === conf && senha !== "")
-            ? `<span class="certo">✔ Senhas iguais</span>`
-            : `<span class="erro">✖ Senhas diferentes</span>`;
-    }
-
-    function criar() {
-        let nome = ipt_nome.value;
-        let email = ipt_email.value;
-        let tel = ipt_telefone.value;
-        let senha = ipt_senha.value;
-        let conf_senha = ipt_confirm_senha.value;
-        let cpf = ipt_cpf.value;
-
-        let erro = false;
-
-
-        msg_nome.innerHTML = "";
-        msg_email.innerHTML = "";
-        msg_tel.innerHTML = "";
-        msg_cpf.innerHTML = "";
-        msg_senha.innerHTML = "";
-        msg_conf.innerHTML = "";
-        msg.innerHTML = "";
-
-        if (nome.length <= 2) {
-            msg_nome.innerHTML = `<span class="erro">✖ Nome inválido</span>`;
-            erro = true;
+    <script>
+        function vlNome() {
+            let nome = ipt_nome.value;
+            if (nome.length <= 2) {
+                msg_nome.innerHTML = `<span class="erro">✖ Nome inválido</span>`;
+            } else {
+                msg_nome.innerHTML = `<span class="certo">✔ Nome válido</span>`;
+            }
         }
 
-        if (!email.includes('@')) {
-            msg_email.innerHTML = `<span class="erro">✖ Email inválido</span>`;
-            erro = true;
+        function vlTelefone() {
+            let tel = ipt_telefone.value;
+            if (tel.length != 11) {
+                msg_tel.innerHTML = `<span class="erro">✖ Telefone inválido</span>`;
+            } else {
+                msg_tel.innerHTML = `<span class="certo">✔ Telefone válido</span>`;
+            }
         }
 
-        if (vt_email.includes(email)) {
-            msg_email.innerHTML = `<span class="erro">✖ Email já cadastrado</span>`;
-            erro = true;
+        function vlCpf() {
+            let cpf = ipt_cpf.value;
+            if (cpf.length != 11) {
+                msg_cpf.innerHTML = `<span class="erro">✖ CPF inválido</span>`;
+            } else {
+                msg_cpf.innerHTML = `<span class="certo">✔ CPF válido</span>`;
+            }
         }
 
-        if (tel.length != 11) {
-            msg_tel.innerHTML = `<span class="erro">✖ Telefone inválido</span>`;
-            erro = true;
+        function vlEmail() {
+            let email = ipt_email.value;
+            if (email.includes('@')) {
+                msg_email.innerHTML = `<span class="certo">✔ Email válido</span>`;
+            } else {
+                msg_email.innerHTML = `<span class="erro">✖ Precisa conter @</span>`;
+            }
         }
 
-        if (cpf.length != 11) {
-            msg_cpf.innerHTML = `<span class="erro">✖ CPF inválido</span>`;
-            erro = true;
+        function vlSenha() {
+            let senha = ipt_senha.value;
+            if (senha.length < 6) {
+                msg_senha.innerHTML = `<span class="erro">✖ Senha fraca</span>`;
+            } else if (senha.includes('@')) {
+                msg_senha.innerHTML = `<span class="certo">✔ Senha forte</span>`;
+            } else {
+                msg_senha.innerHTML = `<span class="media">⚠ Senha média.</span>`;
+            }
         }
 
-        if (
-            senha.length < 6 ||
-            !(
-                senha.includes('@') ||
-                senha.includes('#') ||
-                senha.includes('$') ||
-                senha.includes('!') ||
-                senha.includes('%') ||
-                senha.includes('&')
-            )
-        ) {
-            msg_senha.innerHTML = `<span class="erro">✖ Senha inválida</span>`;
-            erro = true;
+        function cnfSenha() {
+            let senha = ipt_senha.value;
+            let conf = ipt_confirm_senha.value;
+            if (senha === conf && senha !== "") {
+                msg_conf.innerHTML = `<span class="certo">✔ Senhas iguais</span>`;
+            } else {
+                msg_conf.innerHTML = `<span class="erro">✖ Senhas diferentes</span>`;
+            }
         }
 
-        if (senha !== conf_senha) {
-            msg_conf.innerHTML = `<span class="erro">✖ Senhas não coincidem</span>`;
-            erro = true;
+        function criar() {
+            let nome = ipt_nome.value;
+            let email = ipt_email.value;
+            let tel = ipt_telefone.value;
+            let senha = ipt_senha.value;
+            let conf_senha = ipt_confirm_senha.value;
+            let cpf = ipt_cpf.value;
+            let erro = false;
+
+            msg_nome.innerHTML = "";
+            msg_email.innerHTML = "";
+            msg_tel.innerHTML = "";
+            msg_cpf.innerHTML = "";
+            msg_senha.innerHTML = "";
+            msg_conf.innerHTML = "";
+            msg.innerHTML = "";
+
+            if (nome.length <= 2) {
+                msg_nome.innerHTML = `<span class="erro">✖ Nome inválido</span>`;
+                erro = true;
+            }
+
+            if (!email.includes('@')) {
+                msg_email.innerHTML = `<span class="erro">✖ Email inválido</span>`;
+                erro = true;
+            }
+
+            if (tel.length != 11) {
+                msg_tel.innerHTML = `<span class="erro">✖ Telefone inválido</span>`;
+                erro = true;
+            }
+
+            if (cpf.length != 11) {
+                msg_cpf.innerHTML = `<span class="erro">✖ CPF inválido</span>`;
+                erro = true;
+            }
+
+            if (senha.length < 6) {
+                msg_senha.innerHTML = `<span class="erro">✖ Senha muito curta</span>`;
+                erro = true;
+            }
+
+            if (senha != conf_senha) {
+                msg_conf.innerHTML = `<span class="erro">✖ Senhas não coincidem</span>`;
+                erro = true;
+            }
+
+            if (!erro) {
+                formu.style.display = "none";
+                msg.innerHTML = `<b>✔ Conta criada com sucesso para <br>${nome}!</b>`;
+
+            }
         }
+    </script>
 
-        if (!erro) {
-            formu.style.display = "none";
-            msg.innerHTML = `<b>✔ Conta criada com sucesso para <br>${nome}!</b>`;
-
-            vt_email.push(email);
-            vt_senha.push(senha);
-
-            localStorage.setItem('banco_emails', JSON.stringify(vt_email));
-            localStorage.setItem('banco_senhas', JSON.stringify(vt_senha));
-        }
-    }
-</script>
 </body>
 </html>
+
+

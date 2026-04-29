@@ -14,11 +14,11 @@ body {
     justify-content: center;
     align-items: center;
     padding-top: 120px;
-    background-image: url('fundo.avif'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed; 
+    background-image: url('fundo.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
     background-position: center;
 }
@@ -89,16 +89,16 @@ p {
 }
 
 .certo {
-    color: #000000;
+    color: #ffffff;
     font-size: 13px;
 }
 
 .erro {
-    color: #000000;
+    color: #ffffff;
     font-size: 13px;
 }
 
 .media {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 13px;
 }

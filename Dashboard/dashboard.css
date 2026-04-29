@@ -9,7 +9,6 @@ body {
 .topo {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -18,17 +17,15 @@ body {
     gap: 25px;
 }
 
-/*lado esquerdo */
+/* esquerda */
 .esquerda {
     width: 72%;
 }
-
 
 .kpis {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
-
 }
 
 .card {
@@ -48,57 +45,61 @@ body {
     margin-top: 8px;
 }
 
-/* graficos(linhas) temp/umid */
+/* gráficos pequenos */
 .linha {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
 }
 
-
 .graficoMenor {
-    background: #0d2f50;
+    background: #fdfdfe;
     width: 48%;
     height: 280px;
     padding: 15px;
     border-radius: 12px;
-
 }
 
-/* grafico (barras)temperatura e umidade */
+/* gráfico grande */
 .graficoGrande {
-    background: #0d2f50;
+    background: #ffffff;
     height: 360px;
     padding: 20px;
     border-radius: 12px;
-
 }
 
-/* lado direito */
+/* direita */
 .direita {
     width: 28%;
 }
 
-.box {
+.box-tab-status {
     background: #0d2f50;
     padding: 30px;
     border-radius: 12px;
     margin-bottom: 20px;
 }
 
+.box-alerta {
+    background: #942020;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+
 .item {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
-    font-size: 18px;
 }
-
 
 select {
     padding: 6px;
 }
 
-/* BLOCO STATUS SENSORES */
+/* status sensores */
+
 .tabela {
     margin-top: 20px;
 }
@@ -113,13 +114,11 @@ select {
 .linha-status {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid #183d5a;
     font-size: 15px;
 }
 
-/*status*/
 .normal {
     border: 1px solid green;
     color: #00ff88;
