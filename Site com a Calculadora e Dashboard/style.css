@@ -8,6 +8,10 @@
     font-size: 10px;
 }
 
+.logo img {
+    height: 100px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -34,8 +38,8 @@ section {
     left: 0;
     right: 0;
     z-index: 99;
-    background: var(--bg);
-    border-bottom: var(--border);
+    background-color: #0E025C;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .header section {
@@ -48,7 +52,7 @@ section {
 
 .navBar a {
     margin: 0 10px;
-    font-size: 18px;
+    font-size: 20px;
     color: beige;
 }
 
@@ -104,10 +108,12 @@ section {
 
 .content p {
     color: #fff;
-    font-size: 25px;
-    font-weight: 100;
-    line-height: 1.8;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
     padding: 10px 0;
+
+    text-align: justify;
 }
 
 .title {
@@ -194,6 +200,7 @@ section {
     font-size: 40px;
     color: var(--black);
 }
+
 .footer {
     background-color: #0E025C;
     color: white;

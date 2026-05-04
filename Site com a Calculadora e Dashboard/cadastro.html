@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +9,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <header class="header">
-        <section>
-            <a href="index.html" class="logo">
-                <img src="EASYSERVER__1_-removebg-preview 1.png" alt="logo">
-            </a>
-            <nav class="navBar">
-                <a href="index.html">Home</a>
-                <a href="#sobre">Sobre</a>
-                <a href="login.html">Login </a>
-                <a href="cadastro.html">Cadastro</a>
+    <section>
+        <a href="index.html" class="logo">
+            <img src="logoEasyServerPNG.png" alt="logo">
+        </a>
+        <nav class="navBar">
+            <a href="index.html">Home</a>
+            <a href="index.html#sobre">Sobre</a>
+            <a href="login.html">Login </a>
+            <a href="cadastro.html">Cadastro</a>
 
-            </nav>
-        </section>
-    </header>  
+        </nav>
+    </section>
+</header>
+
 <body>
 
     <div id="div_form">
@@ -38,7 +39,7 @@
             <div class="linha">
                 <span class="titulo_campo">Email</span>
                 <div class="campo">
-                    <input id="ipt_email" placeholder="Email"oninput="vlEmail()">
+                    <input id="ipt_email" placeholder="Email" oninput="vlEmail()">
                     <span id="msg_email"></span>
                 </div>
             </div>
@@ -194,13 +195,12 @@
 
             if (!erro) {
                 formu.style.display = "none";
-                msg.innerHTML = `<b>✔ Conta criada com sucesso para <br>${nome}!</b>`;
+                msg.innerHTML = `<b> Conta criada com sucesso para <br>${nome}!</b>`;
 
             }
         }
     </script>
 
 </body>
+
 </html>
-
-
