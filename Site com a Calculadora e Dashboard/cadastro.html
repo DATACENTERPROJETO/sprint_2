@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,15 +23,15 @@
 </header>
 
 <body>
-
+<!-- Campos para o usuário inserir os dados-->
     <div id="div_form">
         <span class="titu">Cadastro</span>
         <div id="formu">
             <div class="linha">
                 <span class="titulo_campo">Nome</span>
                 <div class="campo">
-                    <input id="ipt_nome" placeholder="Nome" oninput="vlNome()">
-                    <span id="msg_nome"></span>
+                    <input id="ipt_nome" placeholder="Nome" oninput="vlNome()"><!--O oniput traz a mensagem em tempo real para o usuário-->
+                    <span id="msg_nome"></span><!--Mensagem que aparece para o usuário-->
                 </div>
             </div>
 
@@ -89,6 +88,7 @@
     </div>
 
     <script>
+        // Mensagem para o usuário
         function vlNome() {
             let nome = ipt_nome.value;
             if (nome.length <= 2) {
@@ -124,17 +124,35 @@
                 msg_email.innerHTML = `<span class="erro">✖ Precisa conter @</span>`;
             }
         }
-
+                (senha.includes('@') ||
+                senha.includes('#') ||
+                senha.includes('%') ||
+                senha.includes('&') ||
+                senha.includes('$'))
+                
         function vlSenha() {
             let senha = ipt_senha.value;
-            if (senha.length < 6) {
-                msg_senha.innerHTML = `<span class="erro">✖ Senha fraca</span>`;
-            } else if (senha.includes('@')) {
-                msg_senha.innerHTML = `<span class="certo">✔ Senha forte</span>`;
-            } else {
-                msg_senha.innerHTML = `<span class="media">⚠ Senha média.</span>`;
-            }
-        }
+
+            let temEspecial =
+                senha.includes('@') ||
+                senha.includes('#') ||
+                senha.includes('%') ||
+                senha.includes('&') ||
+                senha.includes('$');
+
+        if (senha.length >= 6 && temEspecial) {
+        msg_senha.innerHTML = `<span class="certo">✔ Senha forte</span>`;
+    } 
+        else if (senha.length < 6 && temEspecial) {
+        msg_senha.innerHTML = `<span class="media">⚠ Senha média (curta, mas tem especial)</span>`;
+    } 
+        else if (senha.length >= 6 && !temEspecial) {
+        msg_senha.innerHTML = `<span class="media">⚠ Senha média (falta caractere especial)</span>`;
+    } 
+        else {
+        msg_senha.innerHTML = `<span class="erro">✖ Senha fraca</span>`;
+    }
+}
 
         function cnfSenha() {
             let senha = ipt_senha.value;
@@ -145,7 +163,7 @@
                 msg_conf.innerHTML = `<span class="erro">✖ Senhas diferentes</span>`;
             }
         }
-
+//botão de criar conta, valida as infomações e depois efetua o cadastro
         function criar() {
             let nome = ipt_nome.value;
             let email = ipt_email.value;
@@ -187,6 +205,14 @@
                 msg_senha.innerHTML = `<span class="erro">✖ Senha muito curta</span>`;
                 erro = true;
             }
+            if (!senha.includes('@') &&
+                !senha.includes('#') &&
+                !senha.includes('%') &&
+                !senha.includes('&') &&
+                !senha.includes('$')){
+                 msg_senha.innerHTML = `<span class="erro">✖ Senha sem caracteres especiais</span>`;
+                erro = true;
+                }
 
             if (senha != conf_senha) {
                 msg_conf.innerHTML = `<span class="erro">✖ Senhas não coincidem</span>`;
